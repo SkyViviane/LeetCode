@@ -16,7 +16,6 @@
 输出: false
 '''
 
-
 class Solution:
     def increasingTriplet(self, nums) -> bool:
         if len(nums) < 3 or nums is None:
@@ -31,7 +30,6 @@ class Solution:
             else:
                 return True
         return False
-
 
 if __name__ == '__main__':
     so = Solution()
