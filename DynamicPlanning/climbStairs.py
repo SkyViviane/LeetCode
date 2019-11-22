@@ -36,7 +36,6 @@ class Solution(object):
             dp[i] = dp[i - 1] + dp[i - 2]
         return dp[n]
 
-
 if __name__ == '__main__':
     so = Solution()
     n = 1
