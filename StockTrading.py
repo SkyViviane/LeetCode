@@ -26,7 +26,6 @@ def max_income1(prices):
 代码：时间O(n)，空间O(1)。
 '''
 
-
 def max_income2(prices):
     if len(prices) == 2:
         return prices[1] - prices[0]
