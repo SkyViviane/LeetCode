@@ -55,3 +55,38 @@ if __name__=='__main__':
     count = [0] * n
     shopping(n, a)
     print(" ".join(str(s) for s in count))
+
+#通过率100%
+def building(n, w):
+    right = []
+    left = []
+    r = [0] * n
+    l = [0] * n
+    count = [1] * n
+    for i in range(n):
+        r[i] = len(right)
+        if i == 0 or w[i] < right[-1:].pop():
+            right.append(w[i])
+        else:
+            while len(right) != 0 and w[i] >= right[-1:].pop():
+                right.pop()
+            right.append(w[i])
+    for j in range(n - 1, -1, -1):
+        l[j] = len(left)
+        if j == n - 1 or w[j] < left[-1:].pop():
+            left.append(w[j])
+        else:
+            while len(left) != 0 and w[j] >= left[-1:].pop():
+                left.pop()
+            left.append(w[j])
+    for k in range(n):
+        count[k] = r[k] + l[k]
+    return ' '.join(str(s) for s in count)
+    
+
+if __name__=='__main__':
+#     n = 6
+#     w = [5,3,8,3,2,5]
+    n = int(input())
+    w = list(map(int, input().split()))
+    print(building(n, w))
