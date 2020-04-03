@@ -63,3 +63,40 @@ if __name__=='__main__':
     work = [0, 1, 0, 0, 1, 1, 1, 0, 1, 1]
     fitness = [1, 1, 1, 1, 0, 0, 1, 1, 1, 1]
     print(relax(n, work, fitness))                    
+ 
+
+#通过率100%
+def min_relax(n, work, fitness):
+    
+    # dp[0][i]表示第i天休息的最少的休息天数，dp[1][i]表示第i天工作最少的休息天数，dp[2][i]表示第i天健身最少的休息天数
+    dp = [[0 for col in range(n)] for row in range(3)]
+    dp[0][0] = 1
+    if work[0] == 1: dp[1][0] = 0
+    if fitness[0] == 1: dp[2][0] = 0
+    for i in range(1, n):
+        if work[i] == 1:
+            if fitness[i - 1] == 1:
+                dp[1][i] = min(dp[0][i - 1], dp[2][i - 1])
+            else:
+                dp[1][i] = dp[0][i - 1]
+        else:
+            dp[1][i] = n
+        if fitness[i] == 1:
+            if work[i - 1] == 1:
+                dp[2][i] = min(dp[0][i - 1], dp[1][i - 1])
+            else:
+                dp[2][i] = dp[0][i - 1]
+        else:
+            dp[2][i] = n
+        
+        dp[0][i] = min(dp[0][i - 1], dp[1][i - 1], dp[2][i - 1]) + 1
+    return min(dp[0][n - 1], dp[1][n - 1], dp[2][n - 1])
+
+if __name__=='__main__':
+#     n = 4
+#     work = [1, 1, 0, 0]
+#     fitness = [0, 1, 1, 0]
+    n = int(input())
+    work = list(map(int, input().split()))
+    fitness = list(map(int, input().split()))
+    print(min_relax(n, work, fitness))
