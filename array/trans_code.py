@@ -8,12 +8,14 @@ def trans_code(code):
                 if code[i] == '|':
                     k = i
                 i -= 1
-            temp_code = code[k + 1:j] * int(code[i + 1])
+            temp_code = code[k + 1:j] * int(code[i + 1:k])
             code = code.replace(code[i:j+1], temp_code)
             j = i
         j += 1
     return code
             
 if __name__=='__main__':
-    code = 'HG[3|B[2|CA]]F'
+    #code = 'HG[3|B[2|CA]]F'
+    #code = 'BHCJSBCSCW[100|DASKDNKJWDNWCNQWCNOQCNQWOICNWQOINCWQOICNQWOIXWOISWIODAOWPQWDMQKOQZCDWF]WQJDWQUINCQQW[99|SDWQJCIQIUWCNQUCNWQIDNWQUIFNSALQP]DQOJOIXZALPPQQAAX'
+    code = input()
     print(trans_code(code))
