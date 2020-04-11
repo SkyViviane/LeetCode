@@ -27,3 +27,63 @@ if __name__ == '__main__':
     arr = [5, 1, 5, 5, 2, 5, 4]
     k = 10
     print(so.twoSum(arr, k))
+
+    
+'''
+num = [1,2,3,4,5,6,7,8,9]   #nums 为一个有序数组
+给定k
+求nums中两数之和为k的数的下标
+
+如 k =10
+返回结果为 [[0,8],[1,7],[2,6],[3,5]]
+ps: 小提示   nums数组可能存在两数相等的情况 
+    如：nums = [1,2,3,3,4,5,6,7,7,8,9,9]
+'''
+   
+def twoNums(nums, k):
+    lens = len(nums)
+    temp = []
+    res = []
+    for i in range(lens):
+        one = nums[i]
+        two = k - nums[i]
+        for j in range(i + 1, lens):
+            if nums[j] == two:
+                temp.append(i)
+                temp.append(j)
+                res.append(temp)
+                temp = []
+    return res
+                  
+nums = [1,2,3,3,4,5,6,7,7,8,9,9]
+k = 10
+print(twoNums(nums, k))
+
+#利用了有序数组的特性
+def twoNums(nums, k):
+    lens = len(nums)
+    res = []
+    temp = []
+    for l in range(lens):
+        r = lens - 1
+        while l < r:
+            m = k - nums[l]
+            if m == nums[r]:
+                temp.append(l)
+                temp.append(r)
+                res.append(temp)
+                temp = []
+                if nums[r] == nums[r - 1]:
+                    r -= 1
+                else:
+                    break
+            elif m > nums[r]:
+                l += 1
+            else:
+                r -= 1
+        
+    return res
+              
+nums = [1,2,3,3,4,5,6,7,7,8,9,9]
+k = 10
+print(twoNums(nums, k))
